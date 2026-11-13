@@ -201,3 +201,4 @@ db.locais.find(
   { "usuarioId": 1 },
   { "_id": 0, "apelido": 1, "compromissos": 1 }
 );
+

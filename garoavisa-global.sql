@@ -596,3 +596,31 @@ SELECT object_name, object_type, status
   FROM user_objects
  WHERE object_name IN ('PKG_ALERTAS', 'PKG_LOCAIS', 'TRG_AUDITORIA_USUARIO', 'TRG_AUDITORIA_ALERTA')
  ORDER BY object_type, object_name;
+
+--relatorios====================================================================--
+
+--relatorio 1: alertas por bairro (carga inicial)
+SELECT e.bairro, COUNT(*) AS total
+  FROM T_GA_ALERTA a
+  JOIN T_GA_LOCAL    l ON l.id_local    = a.fk_id_local
+  JOIN T_GA_ENDERECO e ON e.id_endereco = l.fk_id_endereco
+ WHERE a.id_alerta <= 10
+ GROUP BY e.bairro
+ ORDER BY total DESC, e.bairro;
+
+--relatorio 2: alertas ativos com gravidade ALTA ou MEDIA (carga inicial)
+SELECT a.titulo, a.gravidade, e.bairro
+  FROM T_GA_ALERTA a
+  JOIN T_GA_LOCAL    l ON l.id_local    = a.fk_id_local
+  JOIN T_GA_ENDERECO e ON e.id_endereco = l.fk_id_endereco
+ WHERE a.status = 'ATIVO'
+   AND a.gravidade IN ('ALTA', 'MEDIA')
+   AND a.id_alerta <= 10
+ ORDER BY a.id_alerta;
+
+--relatorio 3: compromissos dos locais da usuaria Ana (id 1)
+SELECT l.apelido, c.nm_compromisso, c.dt_compromisso, c.hr_compromisso
+  FROM T_GA_LOCAL l
+  JOIN T_GA_COMPROMISSO c ON c.fk_id_local = l.id_local
+ WHERE l.fk_id_usuario = 1
+ ORDER BY l.id_local;
