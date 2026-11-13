@@ -1,7 +1,7 @@
 --GaroAvisa Global SQL--
 --Enzo Vieira Bernardini
---Eduardo Locaspi Batista
---Liana Liyumi Morisita Fujisima
+--Eduardo Batista Locaspi
+--Liana Lyumi Morisita Fujisima
 --Victor Alves Lopes
 
 --limpeza de tabelas==========================================================--
